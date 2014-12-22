@@ -1,0 +1,145 @@
+<!DOCTYPE html> 
+<html> 
+<head> 
+	<title>jQuery Mobile Template</title> 
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" /> 
+	<meta name="viewport" content="width=device-width, initial-scale=1" /> 
+	<link rel="stylesheet" href="jquery-mobile/jquery.mobile-1.4.5.min.css" /> 
+	<script type="text/javascript" src="jquery-mobile/jquery-2.1.1.js"></script> 
+	<script type="text/javascript" src="jquery-mobile/jquery.mobile-1.4.5.min.js"></script> 
+	<script type="text/javascript">
+		const REST_ENDPOINT = "http://" + location.hostname + ":" + location.port + "/";
+	 
+		$(document).on("pageinit", "#page1", function(event){ 
+			//alert("Ready To Go"); 
+		});
+
+		$(document).ready(function(){
+			// CREATE NEW ORDER
+			  $("#button-submitorder").click(function(){
+				  $.ajax({
+					  url: REST_ENDPOINT + "orders/rest",
+					  type : "get",
+					  })
+					  .always(function( data ) {
+						  alert("Order Created!");
+						});
+			  });
+
+			// LIST ORDERS
+			  $("#button-listorders").click(function(){
+					reloadOrders();
+			  });  
+
+			//Populate data
+			  reloadOrders();
+			  
+			});
+
+		function reloadOrders() {
+			  $.ajax({
+				  //url: REST_ENDPOINT + "bpm-rest/bpm",
+				  url: REST_ENDPOINT + "samples-jbossas-ordermgmt-mobile-client/json-test.html",
+				  type : "get",
+				  dataType: "json"
+				  })
+				  .always(function( response ) {
+					  populateListView(response);
+					});
+		}
+			
+		function populateListView(data) {
+			  // Debug output
+			  //console.log("Response: " + data);
+
+			  // Populate database table  
+			  var tablerow = "";
+			  for (var i=0; i < data.processes.length; i++) {
+				tablerow += "<tr>";
+				tablerow += "<td>" + data.processes[i].processId + "</td>";
+				tablerow += "<td>" + data.processes[i].tasks[0].createdOn.split(" ")[0] + "</td>";
+				tablerow += "<td>" + data.processes[i].tasks[0].name + "</td>";
+				tablerow += "</tr>";
+			  }
+			  if (data.processes.length > 0) {
+				  $("#table-myorders-tbody").children().remove();
+				  $("#table-myorders-tbody").append(tablerow);
+			  }
+		  }
+
+	</script> 
+</head> 
+<body> 
+	<div data-role="page" data-theme="a" id="page_homepage"> 
+		<div data-role="header"> 
+			<h1>ACME Inc.</h1> 
+		</div> 
+		<div data-role="main" class="ui-content"> 
+			<img src="img/CAR_Color.png" style="width:150px; display: block; margin-left: auto; margin-right: auto; margin-bottom: 5px;"/>
+			Welcome to the ACME Inc. mobile ordering system. Your one stop shop for car parts!
+			<a href="#page_placeorder" id="button-1" class="ui-btn ui-corner-all">Place new order</a>
+			<a href="#page_myorders" id="button-listorders" class="ui-btn ui-corner-all">View my orders</a>
+		</div> 
+		<div data-role="footer">
+			<h4>&nbsp;</h4> 
+		</div> 
+	</div>
+	
+	<div data-role="page" data-theme="a" id="page_placeorder">
+		<div data-role="header">
+			<a href="#" data-role="button" data-rel="back" data-icon="back">Back</a>
+			<h1>Place new order</h1>
+		</div>
+		<div data-role="main" class="ui-content">
+			<label for="itemno">Item No.:</label>
+        	<input type="text" name="itemno" id="itemno">
+			<label for="name">Name:</label>
+        	<input type="text" name="name" id="name">        	
+        	 <fieldset class="ui-field-contain">
+		        <label for="quantity">Quantity:</label>
+		        <select name="quantity" id="quantity">
+		          <option value="1">1</option>
+		          <option value="2">2</option>
+		          <option value="3">3</option>
+		          <option value="4">4</option>
+		          <option value="5">5</option>
+		          <option value="6">6</option>
+		          <option value="7">7</option>
+		        </select>
+		      </fieldset>
+			<input id="button-submitorder" type="submit" value="Submit order">
+		</div>
+		<div data-role="footer">
+			<h4>&nbsp;</h4>
+		</div>
+	</div>
+	
+	
+	<div data-role="page" data-theme="a" id="page_myorders">
+		<div data-role="header">
+			<a href="#" data-role="button" data-rel="back" data-icon="back">Back</a>
+			<h1>My orders</h1>
+		</div>
+		<div data-role="main" class="ui-content">
+			<table data-role="table" id="table-myorders" data-mode="columntoggle" class="ui-responsive table-stroke" style="font-size: smaller;">
+				<thead>
+					<tr>
+						<th data-priority="1">ID</th>
+						<th data-priority="1">Created</th>
+						<th data-priority="2">Status</th>
+					</tr>
+				</thead>
+				<tbody id="table-myorders-tbody">
+					<tr>
+						<td>No orders available.</td>
+					</tr>
+				</tbody>
+			</table>
+			
+		</div>
+		<div data-role="footer">
+			<h4>&nbsp;</h4>
+		</div>
+	</div>	
+</body> 
+</html>
