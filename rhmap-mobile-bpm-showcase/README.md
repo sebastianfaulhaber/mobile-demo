@@ -12,11 +12,13 @@ A lot has happened in the area of mobile since Apple kicked off the revolution b
 Architectural overview
 ----------------------
 
+![Linktext](./doc/02_arc_overview_component_model.png)
+
+More information on the push API can be found here [http://docs.feedhenry.com/v3/product_features/push_notifications.html](http://docs.feedhenry.com/v3/product_features/push_notifications.html)
 
 Screenshots
 ------------------
-![Linktext](./doc/01_select_template.png)
-[My Link](https://enterprise.openshift.com/)
+tbd
 
 
 Source code
@@ -31,7 +33,7 @@ The source code can be found here:
 * [RHMAP MBaas BPM Connector](https://github.com/sebastianfaulhaber/fh-connector-bpm)
 
 #### Backend layer
-* [JBoss BPM Suite Process Application](https://github.com/sebastianfaulhaber/fh-mobile-bpm-processapp)
+* [JBoss BPM Suite Request Processing Application](https://github.com/sebastianfaulhaber/fh-mobile-bpm-processapp)
 
 B. Installation
 ===============
