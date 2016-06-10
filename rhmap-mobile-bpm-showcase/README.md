@@ -21,29 +21,51 @@ Through the platform approach we do not need to reinvent the wheel for each mobi
 
 The use of Red Hat Mobile Application Platform (RHMAP) comes with the following benefits:
 * Agile approach to developing, integrating, and deploying enterprise mobile applications—whether native, hybrid, or on the web
-* Out-of-the-box automated build processes
+* Out-of-the-box automated build processes (including build farm)
 * A service catalog for reusable connectors to backend
 * Easy scale-out through cloud native architecture
 * Collaborative development across multiple teams and projects with a wide variety of leading tool kits and frameworks
 
 Architectural overview
 ----------------------
-From a technical point of view the showcase is comprised of three main building blocks
-1. CLIENT LAYER: Hybrid mobile applications running on the end user devices
-2. CLOUD LAYER: Node.js based backend running in the cloud on RHMAP
-3. BACKEND LAYER: Set of business process applications running on [JBoss BPM Suite](https://www.redhat.com/en/technologies/jboss-middleware/bpm) as the underlying BPM engine
+From a technical point of view the showcase is comprised of three main building blocks:
+
+* **CLIENT LAYER:** Hybrid mobile applications running on the end user devices
+* **CLOUD LAYER:** Node.js based backend running in the cloud on RHMAP
+* **BACKEND LAYER:** Set of business process applications running on [JBoss BPM Suite](https://www.redhat.com/en/technologies/jboss-middleware/bpm) as the underlying BPM engine
 
 ![ARC_OVERVIEW - Component model](./doc/02_arc_overview_component_model.png)
 
 #### Client layer
 tbd
 
+TODO - Add Screenshots
+
 #### Cloud layer
+
+##### RHMAP Application structure
+![Application overview in Red Hat Mobile Application Platform](./doc/03_arc_overview_cloud_layer_rhmap.png)
 
 ##### Mobile backend as a service (MBaaS)
 An MBaaS (Mobile Backend-as-a-Service) is the primary point of contact for end user applications - both mobile and web. The MBaaS hosts Node.js applications - as REST API servers and/or Express.js based web apps. The primary purpose of the MBaaS is to allow users (developers) of RHMAP to deploy Node.js server-side for their mobile apps. The MBaaS also provides functionality such as caching, persistence, data synchronization and a range of other mobile-centric functionality. Multiple MBaaS may be utilized for customer segregation and/or lifecycle management (environments).
 
-Describe components...
+For this showcase we've developed a new MBaaS connector called `fh-connector-jbpm-cloud`, which is meant to be reused across multiple applications hosted on RHMAP. For the use in our project we've instantiated it and configured the environment variables to connect to our specific JBoss BPM Suite in the backend layer.
+
+![RHMAP MBaaS BPM connector](./doc/04_arc_overview_cloud_layer_rhmap_mbaas.png)
+
+Function wise the MBaaS connector currently provides the following functionality:
+
+* Process management
+  * Start process
+  * Get process instance
+* Task management
+  * Load tasks
+  * Load task content
+  * Claim task
+  * Complete task
+  * Release task
+  * Start task
+
 
 
 ##### Push network
@@ -52,7 +74,6 @@ More information on the push API can be found here [http://docs.feedhenry.com/v3
 Screenshots
 ------------------
 tbd
-
 
 Source code
 -----------
