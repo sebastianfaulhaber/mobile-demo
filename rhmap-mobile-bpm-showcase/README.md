@@ -37,21 +37,30 @@ From a technical point of view the showcase is comprised of three main building 
 ![ARC_OVERVIEW - Component model](./doc/02_arc_overview_component_model.png)
 
 #### Client layer
-tbd
+Since we have two different user groups (eexternal end customer and employees) we've decided to develop two separate applications:
+
+* **Customer App:** This app is meant to be used by our end customers and has therefore being implemented especially with hybrid app development principles in mind. We chose Apache Cordova ([https://cordova.apache.org/](https://cordova.apache.org/)) as our core development approach, which enables us to build our app against all common mobile OS with only one code base ("develop once, run everywhere" principle). In terms of the UI and application framework we decided to go for a combination of ionic ([http://ionicframework.com/](http://ionicframework.com/)) and AngularJS ([https://angularjs.org/](https://angularjs.org/)). Both projects have a vibrant and active community and have been successfully used in many projects.
+
+* **Employee App:** This app targets remote workers (such as insurance agencies e.g.) who shall work on our processes from remote. We've decided to go for the same hybrid app approach in order to share code and speed up things. However, for such an end user group where we might influence the use of certain device types () we could have also thought about a native app (RHMAP provides an SDK for all popular mobile OS; so we could also reuse existing backend functionality in our cloud layer).
+
+It is important to note that we reused the
 
 TODO - Add Screenshots
 
 #### Cloud layer
+The cloud part of an application built with RHMAP is comprised of a so called "Cloud Code App" providing the core functionality for our clients and a set of reusable MBaaS services that enable the connectivity to 3rd party (backend) systems. The following illustration shows an overview of all components created for our showcase:
 
-##### RHMAP Application structure
-![Application overview in Red Hat Mobile Application Platform](./doc/03_arc_overview_cloud_layer_rhmap.png)
+![Application overview in Red Hat Mobile Application Platform](./doc/04_arc_overview_cloud_layer_rhmap.png)
 
-##### Mobile backend as a service (MBaaS)
+##### Cloud code apps
+For our showcase we've implemented a single Node.js based app called `Cloud App` which accepts all incoming requests from our client layer. RHMAP provides a feature rich development framework (including custom Node.js convenience modules) making the creation of cloud code apps easy and efficient. Through the use of Node.js as our programming language we get all the benefits of its evented and asynchronous model, that works extremely well with our use case of a data intense realtime application (DIRT paradigm).
+
+##### MBaaS services (Mobile backend as a service)
 An MBaaS (Mobile Backend-as-a-Service) is the primary point of contact for end user applications - both mobile and web. The MBaaS hosts Node.js applications - as REST API servers and/or Express.js based web apps. The primary purpose of the MBaaS is to allow users (developers) of RHMAP to deploy Node.js server-side for their mobile apps. The MBaaS also provides functionality such as caching, persistence, data synchronization and a range of other mobile-centric functionality. Multiple MBaaS may be utilized for customer segregation and/or lifecycle management (environments).
 
 For this showcase we've developed a new MBaaS connector called `fh-connector-jbpm-cloud`, which is meant to be reused across multiple applications hosted on RHMAP. For the use in our project we've instantiated it and configured the environment variables to connect to our specific JBoss BPM Suite in the backend layer.
 
-![RHMAP MBaaS BPM connector](./doc/04_arc_overview_cloud_layer_rhmap_mbaas.png)
+![RHMAP MBaaS BPM connector](./doc/05_arc_overview_cloud_layer_rhmap_mbaas.png)
 
 Function wise the MBaaS connector currently provides the following functionality:
 
