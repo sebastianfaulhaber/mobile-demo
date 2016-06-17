@@ -39,7 +39,7 @@ From a technical point of view the showcase is comprised of three main building 
 #### Client layer
 Since we have two different user groups (eexternal end customer and employees) we've decided to develop two separate applications:
 
-* **Customer App:** This app is meant to be used by our end customers and has therefore being implemented especially with hybrid app development principles in mind. We chose Apache Cordova ([https://cordova.apache.org/](https://cordova.apache.org/)) as our core development approach, which enables us to build our app against all common mobile OS with only one code base ("develop once, run everywhere" principle). In terms of the UI and application framework we decided to go for a combination of ionic ([http://ionicframework.com/](http://ionicframework.com/)) and AngularJS ([https://angularjs.org/](https://angularjs.org/)). Both projects have a vibrant and active community and have been successfully used in many projects.
+* **Customer App:** This app is meant to be used by our end customers (using a broad range of different mobile devices) and has therefore being implemented especially with hybrid app development principles in mind. We chose Apache Cordova ([https://cordova.apache.org/](https://cordova.apache.org/)) as our core development framework, which enables us to build our app against all common mobile OS with only one code base ("develop once, run everywhere" principle). In terms of the UI and application framework we decided to go for a combination of ionic ([http://ionicframework.com/](http://ionicframework.com/)) and AngularJS ([https://angularjs.org/](https://angularjs.org/)). Both projects have a vibrant and active community and have been successfully adopted by many projects.
 
 * **Employee App:** This app targets remote workers (such as insurance agencies e.g.) who shall work on our processes from remote. We've decided to go for the same hybrid app approach in order to share code and speed up things. However, for such an end user group where we might influence the use of certain device types () we could have also thought about a native app (RHMAP provides an SDK for all popular mobile OS; so we could also reuse existing backend functionality in our cloud layer).
 
@@ -80,6 +80,18 @@ Function wise the MBaaS connector currently provides the following functionality
 ##### Push network
 More information on the push API can be found here [http://docs.feedhenry.com/v3/product_features/push_notifications.html](http://docs.feedhenry.com/v3/product_features/push_notifications.html)
 
+#### Backend layer
+This layer is comprised of a large set of different backend systems that typically run inside the datacenter of an organization; such as application servers, databases, messaging systems or ESB-like services. For the sake of this showcase we've placed JBoss BPM Suite (([https://www.redhat.com/en/technologies/jboss-middleware/bpm](https://www.redhat.com/en/technologies/jboss-middleware/bpm))) as the only system in here. The BPM Suite provides a full blown authoring and runtime environment for business process applications focused on the use of open standards (such as BPMN 2.0). The included BPM engine also exposes a rich REST API that is used extensively by our MBaaS connector `fh-connector-jbpm-cloud` to start new process instances, control the process flow etc.
+
+##### Request processing application
+The core business process for our scenario is implemented in a simple BPMN 2.0 workflow that is being deployed in form of our Java based `Request Processing Application`. After being instantiated the process firstly sends out a push notification to the requesting customer by simply calling the [RHMAP push API](https://sa-jboss-dach.redhat.feedhenry.com/docs/api/api_push.html). Secondly a human task called `Process request` is used to create a new work item in the work basket of our employees.
+
+![Business Process Diagram](./doc/06_arc_overview_backend_layer_bpm_process_diagram.png)
+
+More information on how to develop process applications can be found in the  [JBoss BPM Suite Development Guide](https://access.redhat.com/documentation/en-US/Red_Hat_JBoss_BPM_Suite/6.3/html-single/Development_Guide/index.html).
+
+[TODO - ADD SCREENSHOT]
+
 Screenshots
 ------------------
 tbd
@@ -98,33 +110,9 @@ The source code can be found here:
 #### Backend layer
 * [JBoss BPM Suite Request Processing Application](https://github.com/sebastianfaulhaber/fh-mobile-bpm-processapp)
 
-B. Installation
-===============
-
-1. Red Hat Mobile Application Platform
---------------------------------------
-There are multiple ways to s
-
-2. JBoss BPM Suite
-------------------
-
-3. Configure push notifications
-----------------------------
-
-4. Setup local development environment
---------------------------------------
-
-
-C. User guide
+C. Reference Information
 ========================
 
-1. How can I xyz?
---------------------------------------------------
-tbd
-
-D. Reference Information
-========================
-
-E. Credits
+D. Credits
 ==========
-Sebastian Dehn @Sifa91
+Special thanks to Sebastian Dehn (sdehn@redhat.com) for implementing large parts of the client layer.
