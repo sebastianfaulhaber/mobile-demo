@@ -105,19 +105,19 @@ B. Walkthrough
 
 1. Customer creates new request
 -------------------------------
-![Customer App - Login](./doc/20_walkthrough_01.png)
-![Customer App - Dashboard](./doc/20_walkthrough_02.png)
-![Customer App - Create new request](./doc/20_walkthrough_03.png)
-![Customer App - Create new request](./doc/20_walkthrough_04.png)
-![Customer App - Create new request ](./doc/20_walkthrough_05.png)
-![Customer App - Dashboard showing push](./doc/20_walkthrough_06.png)
-![Customer App - Show process status](./doc/20_walkthrough_07.png)
-![Customer App - Process instance details](./doc/20_walkthrough_08.png)
+![Customer App - Login](./doc/30_walkthrough_01.png)
+![Customer App - Dashboard](./doc/30_walkthrough_02.png)
+![Customer App - Create new request](./doc/30_walkthrough_03.png)
+![Customer App - Create new request](./doc/30_walkthrough_04.png)
+![Customer App - Create new request ](./doc/30_walkthrough_05.png)
+![Customer App - Dashboard showing push](./doc/30_walkthrough_06.png)
+![Customer App - Show process status](./doc/30_walkthrough_07.png)
+![Customer App - Process instance details](./doc/30_walkthrough_08.png)
 
 2. a) Employee works on request
 -------------------------------
-![Request processing application - Work on task instance](./doc/20_walkthrough_20.png)
-![Request processing application - View process model](./doc/20_walkthrough_21.png)
+![Request processing application - Work on task instance](./doc/30_walkthrough_20.png)
+![Request processing application - View process model](./doc/30_walkthrough_21.png)
 
 3. b) Agency / Remote worker completes
 --------------------------------------
@@ -125,9 +125,9 @@ TBD
 
 4. Customer receives push updates on current status
 --------------------------------------
-![Customer App - Push notification on process status](./doc/20_walkthrough_30.png)
-![Customer App - View dashboard](./doc/20_walkthrough_31.png)
-![Customer App - View process status](./doc/20_walkthrough_32.png)
+![Customer App - Push notification on process status](./doc/30_walkthrough_30.png)
+![Customer App - View dashboard](./doc/30_walkthrough_31.png)
+![Customer App - View process status](./doc/30_walkthrough_32.png)
 
 C. Reference Information
 ========================
